@@ -21,7 +21,7 @@ with open('package_list.csv', encoding='utf-8-sig') as csv_file:
 
 # Test to find all packages
 for i in range(1, len(package_list) + 1):
-    print(hash_table.get(i))
+    print(hash_table.get(i).id)
 
 # Assign each location to a Vertex
 

@@ -27,4 +27,4 @@ class HashTable:
         # Returns package if found.
         for package in bucket_list:
             if package.id is package_id:
-                return package.id
+                return package
