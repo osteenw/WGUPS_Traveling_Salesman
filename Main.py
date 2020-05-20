@@ -55,6 +55,8 @@ with open('address_matrix.csv', encoding='utf-8-sig') as csv_file:
 address_index = 0
 for vertex in graph.adjacency_list:
     i = 0
+
+    # Iterates through each edge column for each row of the address_matrix
     while i < len(address_matrix[address_index]) - 3:  # 3 is subtracted because we are skipping the first 3 columns
         graph.add_undirected_edge(vertex,  # Current vertex / Same as vertex at address_matrix[address_index]
                                   address_matrix[i][0],  # Vertex for weighted edge
