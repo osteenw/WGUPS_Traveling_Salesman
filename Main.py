@@ -1,4 +1,3 @@
-import operator
 from import_data import import_package_data, import_address_data
 from algorithm import sort, hash_list, print_status
 
@@ -7,13 +6,6 @@ graph, address_matrix = import_address_data()
 package_list, hash_table = import_package_data(address_matrix)
 
 # Package loading manually
-# Truck 1 - Package [13, 15, 16, 19, 20] Do 15 first - Delivered together [1, 14, 25, 29, 30, 31, 34, 37, 40]
-#            Package 15 must be delivered by 9:00
-# Truck 2 - Package [3, 6, 18, 36, 38] - Special constraints... truck leaves at 9:05 need package 6 delivered by 10:30
-#                    [26, 27, 28, 32, 33, 35, 39] | 12 total
-# Truck 1 Reload - Load [2, 4, 5, 7, 8, 9, 10, 11, 12, 17, 21, 22, 23, 24] | 14 total
-#                   At 1020 am Package 9 address gets an update... Truck reload must leave after 1020
-
 # Load lists will be used to manually load trucks with packages
 load_list1 = [1, 7, 13, 14, 15, 16, 19, 20, 29, 30, 31, 32, 34, 37, 39, 40]
 load_list2 = [3, 4, 6, 18, 22, 25, 26, 28, 36, 38]
@@ -38,6 +30,8 @@ for package in truck_1_packages:
         graph.edge_weights[(graph.get_vertex(previous_location), graph.get_vertex(current_location))])
     print(f"ID: {package.address_id} | Edge {edge_weight} | {address_matrix[package.address_id][1]} | {distance_traveled}")
     distance_traveled += edge_weight
+
+# Calculates distance from last package location and the hub
 edge_weight = float(
     graph.edge_weights[(graph.get_vertex(previous_location), graph.get_vertex(0))])
 print(edge_weight)
