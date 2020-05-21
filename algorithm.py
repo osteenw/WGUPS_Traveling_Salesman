@@ -4,6 +4,7 @@ def sort(list, graph, hash_table, veh_num="Unknown"):
     package_list = hash_list(list, hash_table, veh_num)
 
     # Sorts first location against the hub
+    # Runtime is O(n)
     edge_list = []
     new_order = []
     closest_neighbor = 0
@@ -16,28 +17,30 @@ def sort(list, graph, hash_table, veh_num="Unknown"):
     new_order.append(closest_neighbor)
 
     # Sorts every other location against the previous item in the sorted list
+    # Runtime is O(n^2)
     while len(new_order) < len(package_list):
         last_package = hash_table.get(closest_neighbor)
         edge_list = []
         closest_neighbor = new_order[len(new_order) - 1]
+
         for package in package_list:
-            if last_package.address_id != package.address_id:
-                edge_weight = float(
-                    graph.edge_weights[
-                        (graph.get_vertex(last_package.address_id), graph.get_vertex(package.address_id))])
-                edge_list.append(edge_weight)
-                edge_list.sort()
+            edge_weight = float(
+                graph.edge_weights[
+                    (graph.get_vertex(last_package.address_id), graph.get_vertex(package.address_id))])
+            edge_list.append(edge_weight)
+            edge_list.sort()
 
-                # Conditional to prevent duplicate package id's in the new order
-                if edge_weight == edge_list[0] and (package.id in new_order):
-                    edge_list.pop(0)
+            # Conditional to prevent duplicate package id's in the new order
+            if edge_weight == edge_list[0] and (package.id in new_order):
+                edge_list.pop(0)
 
-                # Conditional in case the list is empty from the previous conditional, and to make sure only new
-                # package ids are added
-                if edge_list != [] and edge_weight == edge_list[0] and (package.id not in new_order):
-                    closest_neighbor = package.id
+            # Conditional in case the list is empty from the previous conditional, and to make sure only new
+            # package ids are added
+            if edge_list != [] and edge_weight == edge_list[0] and (package.id not in new_order):
+                closest_neighbor = package.id
 
         new_order.append(closest_neighbor)
+    print(new_order)
     return hash_list(new_order, hash_table, veh_num)
 
 
@@ -52,6 +55,8 @@ def hash_list(list, hash_table, veh_num="Unknown"):
     return package_list
 
 
+# Prints status of every package
+# Runtime is O(n)
 def print_status(package_list):
     print("========================================================================================================")
     print("=                                      ALL PACKAGES AS OF NOW                                          =")

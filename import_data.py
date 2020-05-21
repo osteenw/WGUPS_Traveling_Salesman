@@ -14,7 +14,7 @@ def import_package_data(address_matrix=[]):
     with open('package_list.csv', encoding='utf-8-sig') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
 
-        # Runtime is O(n)
+        # Runtime is O(n^2)
         for row in csv_reader:
             # Create package
             column = row  # To look at columns within row
