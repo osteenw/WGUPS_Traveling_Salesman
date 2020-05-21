@@ -3,7 +3,9 @@ from hash_table import HashTable
 from package import Package
 import csv
 
-def import_package_data():
+
+# Imports package data into a list of packages, and a hash table
+def import_package_data(address_matrix=[]):
     # Creates package list and hash table
     package_list = []
     hash_table = HashTable()
@@ -16,14 +18,23 @@ def import_package_data():
         for row in csv_reader:
             # Create package
             column = row  # To look at columns within row
-            package = Package(int(column[0]), column[1], column[2], column[3], column[4], column[5], column[6], 'At Hub',
-                              column[7])
+            package = Package(id=int(column[0]), address_id=None, address=column[1], deadline=column[2], city=column[3],
+                              state=column[4], zip=column[5], weight=column[6], status='At Hub', notes=column[7])
+
+            i = 0
+            while i < len(address_matrix):
+                if package.address == address_matrix[i][2]:
+                    package.address_id = i
+                i += 1
+
             # Add the package to the hash table
             hash_table.set(package)
             package_list.append(package)
 
     return package_list, hash_table
 
+
+# Imports address data into a full graph with edges
 def import_address_data():
     graph = Graph()
     address_matrix = []
@@ -53,5 +64,21 @@ def import_address_data():
 
             # Adds the current rows vertex to the graph
             graph.add_vertex(row_data[0])
+
+        # Adds edges between addresses on the graph
+        # Runtime is O(n^2)
+        address_index = 0
+        for vertex in graph.adjacency_list:
+            i = 0
+
+            # Iterates through each edge column for each row of the address_matrix
+            while i < (len(
+                    address_matrix[address_index]) - 3):  # 3 is subtracted because we are skipping the first 3 columns
+                graph.add_undirected_edge(vertex,  # Current vertex / Same as vertex at address_matrix[address_index]
+                                          address_matrix[i][0],  # Vertex for weighted edge
+                                          address_matrix[address_index][i + 3])  # Weighted Edge
+                i += 1
+
+            address_index += 1
 
         return graph, address_matrix
