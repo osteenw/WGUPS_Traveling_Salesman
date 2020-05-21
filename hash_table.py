@@ -32,3 +32,5 @@ class HashTable:
         for package in bucket_list:
             if package.id is package_id:
                 return package
+
+        return None

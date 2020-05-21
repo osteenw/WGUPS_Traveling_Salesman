@@ -1,56 +1,46 @@
 from graph import Vertex, Graph
 from hash_table import HashTable
 from package import Package
+from import_data import import_package_data, import_address_data
 import csv
 import operator
 
-# Creates hash table
-hash_table = HashTable()
-package_list = []
-address_list = []
+# Imports data
+package_list, hash_table = import_package_data()
+graph, address_matrix = import_address_data()
 
-# Initializes package data into the hash table
-with open('package_list.csv', encoding='utf-8-sig') as csv_file:
-    csv_reader = csv.reader(csv_file, delimiter=',')
+# Package loading manually
+# Truck 1 - Package [13, 15, 19, 20] Do 15 first - Delivered together [1, 14, 16, 25, 29, 30, 31, 34, 37, 40] | 14 total
+#            Package 15 must be delivered by 9:00
+# Truck 2 - Package [3, 6, 18, 36, 38] - Special constraints... truck leaves at 9:05 need package 6 delivered by 10:30
+#                    [26, 27, 28, 32, 33, 35, 39] | 12 total
+# Truck 1 Reload - Load [2, 4, 5, 7, 8, 9, 10, 11, 12, 17, 21, 22, 23, 24] | 14 total
+#                   At 1020 am Package 9 address gets an update... Truck reload must leave after 1020
 
-    # Runtime is O(n)
-    for row in csv_reader:
-        # Create package
-        column = row  # To look at columns within row
-        package = Package(int(column[0]), column[1], column[2], column[3], column[4], column[5], column[6], 'At Hub',
-                          column[7])
-        # Add the package to the hash table
-        hash_table.set(package)
-        package_list.append(package)
+# Load lists will be used to manually load trucks with packages
+load_list1 = [1, 13, 14, 15, 16, 19, 20, 25, 29, 30, 31, 34, 37, 40]
+load_list2 = [3, 6, 18, 26, 27, 28, 32, 33, 35, 36, 38, 39]
+load_list3 = [2, 4, 5, 7, 8, 9, 10, 11, 12, 17, 21, 22, 23, 24]
 
-graph = Graph()
-address_matrix = []
+truck_1_packages = []
+truck_2_packages = []
 
-# Initializes a matrix for each address
-# Each address is set to a Vertex on the graph
-with open('address_matrix.csv', encoding='utf-8-sig') as csv_file:
-    csv_reader = csv.reader(csv_file, delimiter=',')
+# Function to load package object into list from a list of index's
+# Runtime is O(n)
+for package in load_list1:
+    hashed_package = hash_table.get(package)
+    truck_1_packages.append(hashed_package)  # 1 is subtracted because package_list starts at index 0
 
-    # Create a list for each row in the file
-    # Runtime is O(n^2)
-    i = 0  # Iterable used for indexing the Vertex
-    for row in csv_reader:
-        row_data = []
+print(address_matrix[0])
+# for address in address_matrix:
+#     print(address_matrix[address])
 
-        # add each column of data to the list
-        row_data.append(Vertex(i))
-        for column in row:
-            if column != '':
-                row_data.append(column)
-            else:
-                i += 1
-                break
-
-        # Adds the current row data to the list
-        address_matrix.append(row_data)
-
-        # Adds the current rows vertex to the graph
-        graph.add_vertex(row_data[0])
+for package in truck_1_packages:
+    i = 0
+    while i < len(address_matrix):
+        if package.address == address_matrix[i][2]:
+            print(f"Package ID: {package.id} = {address_matrix[i][2]}")
+        i += 1
 
 # Adds edges between addresses on the graph
 # Runtime is O(n^2)
@@ -103,6 +93,7 @@ def dijkstra_shortest_path(g, start_vertex):
                 adj_vertex.distance = alternative_path_distance
                 adj_vertex.pred_vertex = current_vertex
 
+
 def get_shortest_path(start_vertex, end_vertex):
     # Start from end_vertex and build the path backwards.
     path = ''
@@ -116,11 +107,10 @@ def get_shortest_path(start_vertex, end_vertex):
 
 dijkstra_shortest_path(graph, graph.get_vertex(0))
 
-# Sort the vertices by the label for convenience; display shortest path for each vertex
-# from vertex_a.
-for v in sorted(graph.adjacency_list, key=operator.attrgetter("label")):
-    if v.pred_vertex is None and v is not graph.get_vertex(0):
-        print("A to %s: no path exists" % v.label)
-    else:
-        print("A to %s: %s (total weight: %g)" % (v.label, get_shortest_path(graph.get_vertex(0), v), v.distance))
-
+# # Sort the vertices by the label for convenience; display shortest path for each vertex
+# # from vertex_a.
+# for v in sorted(graph.adjacency_list, key=operator.attrgetter("label")):
+#     if v.pred_vertex is None and v is not graph.get_vertex(0):
+#         print("A to %s: no path exists" % v.label)
+#     else:
+#         print("A to %s: %s (total weight: %g)" % (v.label, get_shortest_path(graph.get_vertex(0), v), v.distance))
