@@ -40,7 +40,6 @@ def sort(list, graph, hash_table, veh_num="Unknown"):
                 closest_neighbor = package.id
 
         new_order.append(closest_neighbor)
-    print(new_order)
     return hash_list(new_order, hash_table, veh_num)
 
 
@@ -50,16 +49,19 @@ def hash_list(list, hash_table, veh_num="Unknown"):
     package_list = []
     for package in list:
         hashed_package = hash_table.get(package)
-        hashed_package.status = "On Truck {num}".format(num=veh_num)
+        try:
+            hashed_package.status = "On Truck {num}".format(num=veh_num)
+        except AttributeError:
+            print(f"Attribute error for package {package}")
         package_list.append(hashed_package)
     return package_list
 
 
 # Prints status of every package
 # Runtime is O(n)
-def print_status(package_list):
+def print_status(package_list, time):
     print("========================================================================================================")
-    print("=                                      ALL PACKAGES AS OF NOW                                          =")
+    print(f"=                                      ALL PACKAGES AS OF {time}                                          =")
     print("========================================================================================================")
     for package in package_list:
         print(package.package_string())

@@ -12,7 +12,7 @@ class Package:
         self.notes = notes
 
     def package_string(self):
-        string = "Package ID: {id:02d} | Deadline: {deadline:9s} | Status: {status:10s} | Weight: {weight:2s} kilos |" \
+        string = "Package ID: {id:02d} | Deadline: {deadline:9s} | {status:18s} | Weight: {weight:2s} kilos |" \
                  " {city:16s} | {state:2s} | {zip:5s} | {address:20s} |  {notes}" \
             .format(id=self.id, deadline=self.deadline, status=self.status, state=self.state, city=self.city,
                     zip=self.zip, address=self.address, weight=self.weight, notes=self.notes)
