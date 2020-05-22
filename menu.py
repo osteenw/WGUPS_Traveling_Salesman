@@ -1,3 +1,6 @@
+# Created by Will Osteen
+# Student ID 001099825
+
 def print_menu():
     print("\n==========================================================")
     print(f"=                   MAIN MENU                           =")

@@ -1,3 +1,7 @@
+# Will Osteen
+# Student ID 001099825
+# From section 7.8 of the DSA 2 zyBook on creating a hash table data structure in python.
+
 class HashTable:
 
     # Constructor

@@ -1,3 +1,6 @@
+# Created by Will Osteen
+# Student ID 001099825
+
 class Package:
     def __init__(self, id, address_id, address, deadline, city, state, zip, weight, status, notes):
         self.id = id

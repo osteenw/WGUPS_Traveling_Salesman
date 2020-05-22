@@ -26,6 +26,10 @@ def sort(list, graph, hash_table, veh_num="Unknown"):
         edge_list = []
         closest_neighbor = new_order[len(new_order) - 1]
 
+        # Runtime is O(n)
+        # Adds the distance for each package address from the previous package address to a list.
+        # The list is then sorted for closest distance first. If the current package has the closest address it is
+        # now the closest neighbor and is next to be added to the new sort list.
         for package in package_list:
             edge_weight = float(
                 graph.edge_weights[

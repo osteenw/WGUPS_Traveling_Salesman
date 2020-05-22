@@ -36,11 +36,13 @@ while menu is True:
             continue
 
         if hour > 23 or hour < 0:
-            print("Invalid hour input. Hours will be set to 0")
+            print("\nInvalid hour input. Hours will be set to 0")
             hour = 0
+            continue
         if min > 59 or min < 0:
-            print("Invalid minute input. Minutes will be set to 0")
+            print("\nInvalid minute input. Minutes will be set to 0")
             min = 0
+            continue
 
         delivery(load_list1, load_list2, load_list3, hour, min)
     elif choice == 0:

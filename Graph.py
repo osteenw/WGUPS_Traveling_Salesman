@@ -1,3 +1,7 @@
+# Will Osteen
+# Student ID 001099825
+# From section 6.12 of the DSA 2 zyBook on Dijkstra's algorithm in Python.
+
 # Graph and Vertex Classes
 class Vertex:
     # Runtime is O(1)

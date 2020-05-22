@@ -6,8 +6,7 @@ from algorithm import sort, hash_list
 from menu import print_status
 
 
-# Converts time from hours and minutes to minutes
-# This is used for determining package location. Time must be after 0800
+# Clock class is used for keeping track of delivery times.
 class Clock:
     def __init__(self, hour, min, end_hour, end_min):
         self.hour = hour
@@ -31,18 +30,23 @@ class Clock:
         return f"{self.end_hour:02d}:{self.end_min:02d}"
 
 
+# Runtime is O(n)
 def delivery(list1, list2, list3, hour, min):
     # Imports data
     graph, address_matrix = import_address_data()
     package_list, hash_table = import_package_data(address_matrix)
 
-    time = Clock(8, 0, hour, min)
+    time = Clock(8, 0, hour, min)  # Initializes clock starting time to 8 AM
     total_distance = 0
 
+    # If end time requested is 08:00 or later, truck 1 is loaded and leaves
+    # Runtime is O(n)
     if time.end_hour > 7:
         list1 = sort(list1, graph, hash_table, 1)
         total_distance += delivery_algo(graph, time, list1)
 
+    # Second delivery can't happen until 9:05 when package #28 arrives at the hub.
+    # Runtime is O(n)
     if (time.hour > 8 and time.min > 5) \
             and (time.hour < time.end_hour or ((time.hour == time.end_hour) and (time.min < time.end_min))):
         list2 = sort(list2, graph, hash_table, 2)
@@ -50,15 +54,29 @@ def delivery(list1, list2, list3, hour, min):
 
     # When truck driver 1 finishes, he takes truck 3
     # Delivery time must be after 10:20 to get package change
+    # Runtime is O(n)
     if time.delivery1_finished == True:
         if time.hour > 11 or (time.hour > 10 and time.min > 20) \
                 and (time.hour < time.end_hour or ((time.hour == time.end_hour) and (time.min < time.end_min))):
+
+            # Package #9 is manually getting it's address information updated
+            # Runtime is O(n)
+            package9 = hash_table.get(9)
+            package9.address = "410 S State St."
+            package9.address_id = 19
+            package9.notes = "Package address updated from 300 State St"
+
             list3 = sort(list3, graph, hash_table, 3)
             total_distance += delivery_algo(graph, time, list3)
 
+    # Runtime is O(n)
     print_status(package_list, time.get_end_time())
+
+    # Runtime is O(1)
     print(f"\nTotal distance traveled: {int(total_distance)} miles")
 
+
+# Runtime is O(n)
 def delivery_algo(graph, time, list1):
     current_location = 0
     previous_location = 0

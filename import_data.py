@@ -1,3 +1,6 @@
+# Created by Will Osteen
+# Student ID 001099825
+
 from graph import Vertex, Graph
 from hash_table import HashTable
 from package import Package
