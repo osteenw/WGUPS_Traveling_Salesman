@@ -8,6 +8,7 @@ import csv
 
 
 # Imports package data into a list of packages, and a hash table
+# Runtime is O(n^2)
 def import_package_data(address_matrix=[]):
     # Creates package list and hash table
     package_list = []
@@ -38,6 +39,7 @@ def import_package_data(address_matrix=[]):
 
 
 # Imports address data into a full graph with edges
+# Runtime is O(n^2)
 def import_address_data():
     graph = Graph()
     address_matrix = []

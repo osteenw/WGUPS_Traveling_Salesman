@@ -7,6 +7,7 @@ from menu import print_status
 
 
 # Clock class is used for keeping track of delivery times.
+# Runtime is O(1)
 class Clock:
     def __init__(self, hour, min, end_hour, end_min):
         self.hour = hour
@@ -30,6 +31,7 @@ class Clock:
         return f"{self.end_hour:02d}:{self.end_min:02d}"
 
 
+# Main delivery function. This algorithm manually loads trucks, and delivers packages within the specified time frame.
 # Runtime is O(n)
 def delivery(list1, list2, list3, hour, min):
     # Imports data
@@ -58,7 +60,6 @@ def delivery(list1, list2, list3, hour, min):
     if time.delivery1_finished == True:
         if time.hour > 11 or (time.hour > 10 and time.min > 20) \
                 and (time.hour < time.end_hour or ((time.hour == time.end_hour) and (time.min < time.end_min))):
-
             # Package #9 is manually getting it's address information updated
             # Runtime is O(n)
             package9 = hash_table.get(9)
@@ -76,6 +77,7 @@ def delivery(list1, list2, list3, hour, min):
     print(f"\nTotal distance traveled: {int(total_distance)} miles")
 
 
+# This is the algorithm for actually delivering packages on a loaded truck.
 # Runtime is O(n)
 def delivery_algo(graph, time, list1):
     current_location = 0

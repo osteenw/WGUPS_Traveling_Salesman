@@ -1,6 +1,9 @@
 # Created by Will Osteen
 # Student ID 001099825
 
+# Algorithm to sort a list of packages by order of their nearest neighbor.
+# Nearest neighbor is determined by the edge-weight between package addresses.
+# Runtime is O(n^2)
 def sort(list, graph, hash_table, veh_num="Unknown"):
     # Function to load package object into list from a list of index's
     # Runtime is O(n)
@@ -31,6 +34,7 @@ def sort(list, graph, hash_table, veh_num="Unknown"):
         # The list is then sorted for closest distance first. If the current package has the closest address it is
         # now the closest neighbor and is next to be added to the new sort list.
         for package in package_list:
+            # Looks up edge weight. Runtime is O(1)
             edge_weight = float(
                 graph.edge_weights[
                     (graph.get_vertex(last_package.address_id), graph.get_vertex(package.address_id))])
