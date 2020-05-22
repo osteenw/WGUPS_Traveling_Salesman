@@ -1,3 +1,6 @@
+# Created by Will Osteen
+# Student ID 001099825
+
 def sort(list, graph, hash_table, veh_num="Unknown"):
     # Function to load package object into list from a list of index's
     # Runtime is O(n)
@@ -55,13 +58,3 @@ def hash_list(list, hash_table, veh_num="Unknown"):
             print(f"Attribute error for package {package}")
         package_list.append(hashed_package)
     return package_list
-
-
-# Prints status of every package
-# Runtime is O(n)
-def print_status(package_list, time):
-    print("========================================================================================================")
-    print(f"=                                      ALL PACKAGES AS OF {time}                                          =")
-    print("========================================================================================================")
-    for package in package_list:
-        print(package.package_string())

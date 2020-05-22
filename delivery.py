@@ -1,5 +1,9 @@
+# Created by Will Osteen
+# Student ID 001099825
+
 from import_data import import_package_data, import_address_data
-from algorithm import sort, hash_list, print_status
+from algorithm import sort, hash_list
+from menu import print_status
 
 
 # Converts time from hours and minutes to minutes
@@ -27,7 +31,11 @@ class Clock:
         return f"{self.end_hour:02d}:{self.end_min:02d}"
 
 
-def delivery(graph, hash_table, package_list, list1, list2, list3, hour, min):
+def delivery(list1, list2, list3, hour, min):
+    # Imports data
+    graph, address_matrix = import_address_data()
+    package_list, hash_table = import_package_data(address_matrix)
+
     time = Clock(8, 0, hour, min)
     total_distance = 0
 
@@ -48,9 +56,8 @@ def delivery(graph, hash_table, package_list, list1, list2, list3, hour, min):
             list3 = sort(list3, graph, hash_table, 3)
             total_distance += delivery_algo(graph, time, list3)
 
-    print(f"Total distance traveled: {int(total_distance)} miles")
     print_status(package_list, time.get_end_time())
-
+    print(f"\nTotal distance traveled: {int(total_distance)} miles")
 
 def delivery_algo(graph, time, list1):
     current_location = 0
