@@ -4,7 +4,7 @@ Algorithim for optimizing delivery for WGUPS. This project is a take on the clas
 I made a heuristic based sort algorithm based on the closest neighbor approach to the traveling salesman problem. Where I had a starting point as a vertice, and sorted the edge from the starting point to every other vertice in the circuit. The vertice with the smallest weighted edge is chosen. This repeats until there is no other choice but to return to the starting point.
  
  ## Overview
-For this project a set of list of packages and addresses are given. The following are some assumptions and constraints.
+For this project a list of packages and addresses are given. The following are some assumptions and constraints.
 
 * Each truck can carry a maximum of 16 packages.
 * Trucks travel at an average speed of 18 miles per hour.
