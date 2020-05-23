@@ -51,6 +51,7 @@ def sort(list, graph, hash_table, veh_num="Unknown"):
                 closest_neighbor = package.id
 
         new_order.append(closest_neighbor)
+
     return hash_list(new_order, hash_table, veh_num)
 
 
