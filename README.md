@@ -17,4 +17,12 @@ For this project a set of list of packages and addresses are given. The followin
 * The package ID is unique; there are no collisions.
 * No further assumptions exist or are allowed.
 
+## Screenshot
 
+Total Distance Traveled
+
+![Total Distance Traveled](screenshot.png)
+
+The main goal of the project is for your algorithm to optimize a total delivery route that comes in under 140miles round trip for all three truck loads.
+
+My final distance traveled came in at 118 miles.
