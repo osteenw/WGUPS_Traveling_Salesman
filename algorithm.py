@@ -39,6 +39,7 @@ def sort(list, graph, hash_table, veh_num="Unknown"):
                 graph.edge_weights[
                     (graph.get_vertex(last_package.address_id), graph.get_vertex(package.address_id))])
             edge_list.append(edge_weight)
+            # Runtime is O(nlogn)
             edge_list.sort()
 
             # Conditional to prevent duplicate package id's in the new order
