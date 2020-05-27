@@ -3,14 +3,11 @@
 
 # Algorithm to sort a list of packages by order of their nearest neighbor.
 # Nearest neighbor is determined by the edge-weight between package addresses.
-# Runtime is O(n^2)
 def sort(list, graph, hash_table, veh_num="Unknown"):
     # Function to load package object into list from a list of index's
-    # Runtime is O(n)
     package_list = hash_list(list, hash_table, veh_num)
 
     # Sorts first location against the hub
-    # Runtime is O(n)
     edge_list = []
     new_order = []
     closest_neighbor = 0
@@ -23,23 +20,20 @@ def sort(list, graph, hash_table, veh_num="Unknown"):
     new_order.append(closest_neighbor)
 
     # Sorts every other location against the previous item in the sorted list
-    # Runtime is O(n^2)
     while len(new_order) < len(package_list):
         last_package = hash_table.get(closest_neighbor)
         edge_list = []
         closest_neighbor = new_order[len(new_order) - 1]
 
-        # Runtime is O(n^2logn)
         # Adds the distance for each package address from the previous package address to a list.
         # The list is then sorted for closest distance first. If the current package has the closest address it is
         # now the closest neighbor and is next to be added to the new sort list.
         for package in package_list:
-            # Looks up edge weight. Runtime is O(1)
+            # Looks up edge weight.
             edge_weight = float(
                 graph.edge_weights[
                     (graph.get_vertex(last_package.address_id), graph.get_vertex(package.address_id))])
             edge_list.append(edge_weight)
-            # Runtime is O(nlogn)
             edge_list.sort()
 
             # Conditional to prevent duplicate package id's in the new order
@@ -57,7 +51,6 @@ def sort(list, graph, hash_table, veh_num="Unknown"):
 
 
 # Function to load package object into list from a list of index's
-# Runtime is O(n)
 def hash_list(list, hash_table, veh_num="Unknown"):
     package_list = []
     for package in list:

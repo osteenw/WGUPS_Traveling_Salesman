@@ -8,7 +8,6 @@ import csv
 
 
 # Imports package data into a list of packages, and a hash table
-# Runtime is O(n^2)
 def import_package_data(address_matrix=[]):
     # Creates package list and hash table
     package_list = []
@@ -18,7 +17,6 @@ def import_package_data(address_matrix=[]):
     with open('package_list.csv', encoding='utf-8-sig') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
 
-        # Runtime is O(n^2)
         for row in csv_reader:
             # Create package
             column = row  # To look at columns within row
@@ -39,7 +37,6 @@ def import_package_data(address_matrix=[]):
 
 
 # Imports address data into a full graph with edges
-# Runtime is O(n^2)
 def import_address_data():
     graph = Graph()
     address_matrix = []
@@ -50,7 +47,6 @@ def import_address_data():
         csv_reader = csv.reader(csv_file, delimiter=',')
 
         # Create a list for each row in the file
-        # Runtime is O(n^2)
         i = 0  # Iterable used for indexing the Vertex
         for row in csv_reader:
             row_data = []
@@ -71,7 +67,6 @@ def import_address_data():
             graph.add_vertex(row_data[0])
 
         # Adds edges between addresses on the graph
-        # Runtime is O(n^2)
         address_index = 0
         for vertex in graph.adjacency_list:
             i = 0

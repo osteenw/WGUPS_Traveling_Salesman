@@ -10,7 +10,6 @@ load_list1 = [1, 7, 13, 14, 15, 16, 19, 20, 29, 30, 31, 34, 37, 39, 40]
 load_list2 = [3, 4, 6, 18, 25, 26, 28, 32, 36, 38]
 load_list3 = [2, 5, 8, 9, 10, 11, 12, 17, 21, 22, 23, 24, 27, 33, 35]
 
-# Runtime is O(n)
 # Main interface for seeing package delivery
 menu = True
 while menu is True:

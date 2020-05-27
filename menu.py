@@ -10,7 +10,6 @@ def print_menu():
     print("Enter 0 to exit")
 
 # Prints status of every package
-# Runtime is O(n)
 def print_status(package_list, time):
     print("========================================================================================================")
     print(f"=                                      ALL PACKAGES AS OF {time}                                        =")
