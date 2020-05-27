@@ -29,7 +29,7 @@ def sort(list, graph, hash_table, veh_num="Unknown"):
         edge_list = []
         closest_neighbor = new_order[len(new_order) - 1]
 
-        # Runtime is O(n)
+        # Runtime is O(n^2logn)
         # Adds the distance for each package address from the previous package address to a list.
         # The list is then sorted for closest distance first. If the current package has the closest address it is
         # now the closest neighbor and is next to be added to the new sort list.
@@ -39,6 +39,7 @@ def sort(list, graph, hash_table, veh_num="Unknown"):
                 graph.edge_weights[
                     (graph.get_vertex(last_package.address_id), graph.get_vertex(package.address_id))])
             edge_list.append(edge_weight)
+            # Runtime is O(nlogn)
             edge_list.sort()
 
             # Conditional to prevent duplicate package id's in the new order
