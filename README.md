@@ -26,8 +26,3 @@ Total Distance Traveled
 The main goal of the project is for your algorithm to optimize a total delivery route that comes in under 140miles round trip for all three truck loads.
 
 My final distance traveled came in at 118 miles.
-
-
-#### Footnote
-
-The project in the GitHub repo is how I turned it in as a school project. While writing the write up to go along with my project submission, I realized how inefficient the sorting algorithm is. Currently, it calls the .sort function of a list which has a big O of nlogn, inside of a for loop (making it n^2logn). A quick solution to increase efficiency would have been to compare against the list index of 0 and insert at the 0 index if it was less than that index to find the lowest value in the list. As the algorithm is, it is not very scalable.
